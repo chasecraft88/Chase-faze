@@ -5,47 +5,22 @@ const gameConfig = {
     height: 600, // Adjust the height as needed for your game
     scene: {
         preload: preload,
-        create: create,
-        update: update
+        create: create
     }
 };
 
 const game = new Phaser.Game(gameConfig);
 
-let player;
-let zombies;
-
 function preload() {
-    this.load.image('player', 'assets/assets/Img3.Png');
-    this.load.image('zombie', 'assets/assets/Img2.Png');
+    // Preload game assets
+    this.load.image('image1', 'assets/Img1.jpg');
+    this.load.image('image2', 'assets/Img2.jpg');
+    // Add more assets as needed
 }
 
 function create() {
-    player = this.physics.add.sprite(400, 300, 'player');
-    zombies = this.physics.add.group();
-
-    for (let i = 0; i < 5; i++) {
-        const x = Phaser.Math.Between(0, 800);
-        const y = Phaser.Math.Between(0, 600);
-        const zombie = zombies.create(x, y, 'zombie');
-    }
-}
-
-function update() {
-    // Zombie chasing logic
-    zombies.getChildren().forEach((zombie) => {
-        const dx = player.x - zombie.x;
-        const dy = player.y - zombie.y;
-        const angle = Math.atan2(dy, dx);
-        const speed = 2;
-        const vx = speed * Math.cos(angle);
-        const vy = speed * Math.sin(angle);
-        zombie.setVelocity(vx, vy);
-    });
-
-    // Player control (touch input)
-    if (this.input.activePointer.isDown) {
-        player.x = this.input.x;
-        player.y = this.input.y;
-    }
+    // Create game objects
+    this.add.image(400, 300, 'image1');
+    this.add.image(200, 300, 'image2');
+    // Add more game objects and logic
 }
