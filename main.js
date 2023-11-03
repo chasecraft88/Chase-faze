@@ -5,22 +5,29 @@ const gameConfig = {
     height: 600, // Adjust the height as needed for your game
     scene: {
         preload: preload,
-        create: create
+        create: create,
+        update: update
     }
 };
 
 const game = new Phaser.Game(gameConfig);
 
+let player;
+
 function preload() {
     // Preload game assets
-    this.load.image('image1', 'assets/Img1.jpg');
-    this.load.image('image2', 'assets/Img2.jpg');
-    // Add more assets as needed
+    this.load.image('background', 'assets/Img1.jpg');
+    this.load.image('player', 'assets/Img2.jpg');
 }
 
 function create() {
     // Create game objects
-    this.add.image(400, 300, 'image1');
-    this.add.image(200, 300, 'image2');
-    // Add more game objects and logic
+    this.add.image(400, 300, 'background'); // Display the background image
+    player = this.physics.add.sprite(400, 300, 'player'); // Create a player sprite
+
+    // Set up physics, input, or any other game logic you need
+}
+
+function update() {
+    // Implement game logic and behavior in the update function
 }
