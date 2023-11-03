@@ -25,9 +25,26 @@ function create() {
     this.add.image(400, 300, 'background'); // Display the background image
     player = this.physics.add.sprite(400, 300, 'player'); // Create a player sprite
 
-    // Set up physics, input, or any other game logic you need
+    // Set up physics
+    this.physics.world.setBounds(0, 0, 800, 600);
+    player.setCollideWorldBounds(true);
+
+    // Enable touch input for player movement
+    this.input.on('pointerdown', function (pointer) {
+        // Move the player sprite to the pointer's position
+        this.physics.moveTo(player, pointer.x, pointer.y, 200);
+    }, this);
 }
 
 function update() {
-    // Implement game logic and behavior in the update function
+    // Implement your game logic and behavior in the update function
+
+    // Example: Rotate the player sprite
+    player.angle += 1;
+
+    // Example: Check for game over conditions
+    if (player.angle >= 360) {
+        // Reset the player's rotation
+        player.angle = 0;
+    }
 }
